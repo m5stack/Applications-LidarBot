@@ -12,9 +12,9 @@
    
 ## 3、源码
   
-   雷达车：[雷达车](./LidarBot/Firmware/Lidar_Remoter_FW/LidarBotRemote_M5)
+   雷达车：[Bot](./LidarBot/Firmware/Lidar_Remoter_FW/LidarBotRemote_M5)
  
-   遥控器：[遥控器](./LidarBot/Firmware/Lidar_Scan_FW//LidarBotM5_RemoteAndScan_V1.1)
+   遥控器：[Remote](./LidarBot/Firmware/Lidar_Scan_FW//LidarBotM5_RemoteAndScan_V1.1)
   
 
 ## 4、激光车示图
