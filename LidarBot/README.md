@@ -5,3 +5,4 @@
      点击链接：
      
         [Github](https://github.com/m5stack/M5Stack)
+        English | [中文](docs/getting_started_cn.md)
