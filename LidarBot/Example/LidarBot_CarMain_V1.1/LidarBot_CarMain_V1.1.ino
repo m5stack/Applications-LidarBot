@@ -415,8 +415,8 @@ void setup() {
   digitalWrite(35, HIGH);
   digitalWrite(36, HIGH);
   Serial.begin(115200);
-  Serial1.begin(230400, SERIAL_8N1, 16, 2); //Lidar
-  Serial2.begin(115200, SERIAL_8N1, 5, 17); //Motor
+  Serial1.begin(230400, SERIAL_8N1, 16, 2); //Lidar (actually, we only use GPIO16 for receiving sensor's data. GPIO2 is unused.)
+  Serial2.begin(115200, SERIAL_8N1, 5, 17); //Motor (actually, we only use GPIO16 for receiving sensor's data. GPIO5 is unused.) 
   preferences.begin("my-app", false);
   //Set device in AP mode to begin with
   m5.lcd.setBrightness(0);
