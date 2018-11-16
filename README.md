@@ -15,10 +15,10 @@
   
    雷达车：[Bot](https://github.com/m5stack/Applications/tree/master/LidarBot/Firmware/Lidar_Scan_FW/LidarBotM5_RemoteAndScan_V1.1)
  
-   遥控器：[Remote](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.0)
+   遥控器：[Remote_V1.0](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.0)
    
-   遥控器：[Remote](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.1)
-  
+   遥控器：[Remote_V1.1](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.1)
+          修改手柄精度。
 
 ## 4、激光车示图
 
