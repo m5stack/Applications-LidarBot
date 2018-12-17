@@ -17,7 +17,7 @@
  
    遥控器：[Remote_V1.0](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.0)
    
-   遥控器：[Remote_V1.1](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.1)
+   遥控器：[Remote_V1.1](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
           修改手柄精度。
 
 ## 4、激光车示图
