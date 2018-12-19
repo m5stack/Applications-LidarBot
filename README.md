@@ -1,5 +1,4 @@
 # LidarBot
-
    LidarBot是能够应用于地图扫描、运动控制研究、路径规划、人工智能、自动驾驶以及多机协同任务的非常强大，好用的轮式机器人套件。
  
 
@@ -8,20 +7,22 @@
 
 ## 2、原理图
 
-![image](LidarBot/Schematic_Diagram/576571642811095946.jpg)
+![image](.//Schematic_Diagram/576571642811095946.jpg)
    
    
 ## 3、源码
   
-   雷达车：[Bot](https://github.com/m5stack/Applications/tree/master/LidarBot/Firmware/Lidar_Scan_FW/LidarBotM5_RemoteAndScan_V1.1)
+   雷达车：[Bot](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_CarMain_V1.1)
  
-   遥控器：[Remote_V1.0](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.0)
+   遥控器：[Remote](https://github.com/m5stack/Applications/tree/master/LidarBot/Firmware/Lidar_Remoter_FW/LidarBotRemote_M5)
+
+## 4、上位机  
+   新加上位机调试功能。
    
-   遥控器：[Remote_V1.2](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
-          修改手柄精度，框架。
+   功能一：实时显示LidarBot地图。
+   
+## 5、激光车示图
 
-## 4、激光车示图
-
-![image](LidarBot/Product_Picture/403212353277269881.jpg)
-![image](LidarBot/Product_Picture/545126402675232250.jpg)
-![image](LidarBot/Product_Picture/785202095111185304.jpg)
+![image](./Product_Picture/403212353277269881.jpg)
+![image](./Product_Picture/545126402675232250.jpg)
+![image](./Product_Picture/785202095111185304.jpg)
