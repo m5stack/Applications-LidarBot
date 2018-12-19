@@ -113,7 +113,7 @@ void KeyBoard::GetValue(void){
    }else{
       
    }
-   Serial.printf("dconsoleX:%d   dconsoleY:%d\n", consoleX, consoleY);
+   //Serial.printf("dconsoleX:%d   dconsoleY:%d\n", consoleX, consoleY);
    LedControl();
 }
 
