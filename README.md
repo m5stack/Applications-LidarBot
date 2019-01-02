@@ -127,6 +127,8 @@ void loop()
 
 ## 5、激光车示图
 
-![image](./LidarBot/Product_Picture/403212353277269881.jpg)
+**长：142mm， 宽：117mm， 高：120mm**
+
+![image](./LidarBot/Product_Picture/lidarbot_03.jpg)
 ![image](./LidarBot/Product_Picture/545126402675232250.jpg)
 ![image](./LidarBot/Product_Picture/785202095111185304.jpg)
