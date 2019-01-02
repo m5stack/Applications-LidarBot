@@ -68,14 +68,14 @@ class LidarCar {
    void MapDisplay(void);
  public:
    uint8_t mapdata[180];
+   uint16_t distance[360];
  private:
    void setLedColor(byte i, byte r, byte g, byte b);
    void setLedAll( byte r, byte g, byte b);
- 
+
  private:
    int disX[360], disY[360];
    int oldDisX[360], oldDisY[360];
-   uint16_t distance[360];
    int commandStatus;
    int ver;
    uint16_t dataLength;

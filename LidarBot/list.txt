@@ -1,0 +1,24 @@
+文件夹 PATH 列表
+卷序列号为 000000C9 0009:724F
+D:.
+├─Example
+│  ├─LidarBot_CarMain_V1.1
+│  ├─LidarBot_RemoteController_V1.0
+│  └─LidarBot_RemoteController_V1.2
+├─Firmware
+│  ├─LidarBot_Bottom_FW
+│  │  └─MCAR328
+│  └─LidarBot_Remote_FW
+│      └─FaceJoystick328
+├─Product_Picture
+├─Schematic_Diagram
+└─SComAssistant
+    ├─LidarBot-AccessPort
+    │  ├─bearer
+    │  ├─iconengines
+    │  ├─imageformats
+    │  ├─platforms
+    │  └─translations
+    └─resource
+        ├─file
+        └─qextserialport

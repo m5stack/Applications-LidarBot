@@ -23,7 +23,7 @@ void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len){
 
     accessport.MapSend(data,180);
     #if 0
-     if(!send_flag){  
+     if(!send_flag){
        Serial.write(data,180);
        send_flag = 1;
       }
@@ -43,7 +43,7 @@ void MapDisplay(void){
       M5.Lcd.drawPixel(disX, disY, YELLOW);
     oldDisX[showAngle] = disX;
     oldDisY[showAngle] = disY;
-  } 
+  }
 }
 void setup() {
   m5.begin();
@@ -52,7 +52,7 @@ void setup() {
   M5.Lcd.fillScreen(TFT_BLACK);
   m5.lcd.pushImage(0, 0, 320, 240, (uint16_t *)gImage_logo);
   delay(2000);
-  M5.Lcd.fillScreen(TFT_BLACK);  
+  M5.Lcd.fillScreen(TFT_BLACK);
 
   //!key
   keyboard.Init();
@@ -60,7 +60,7 @@ void setup() {
   //!esp
   espnow.RemoteInit();
   esp_now_register_recv_cb(OnDataRecv);
-  
+
 }
 void loop()
 {
@@ -74,9 +74,9 @@ void loop()
   if(Serial.available() == 3){
    Serial.readBytes(buffer,3);
    if(!strcmp((char *)buffer,"ack")){
-    send_flag = 0;   
+    send_flag = 0;
    }
-   Serial.flush();  
+   Serial.flush();
   }else{
     while(Serial.available() > 0){
       Serial.read();
