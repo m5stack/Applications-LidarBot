@@ -118,7 +118,7 @@ void loop()
 
    雷达车：[Bot](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_CarMain_V1.1)
 
-   遥控器：[Remote](https://github.com/m5stack/Applications/tree/master/LidarBot/Firmware/Lidar_Remoter_FW/LidarBotRemote_M5)
+   遥控器：[Remote](https://github.com/m5stack/Applications-LidarBot/blob/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
 
 ## 4、上位机
    新加上位机调试功能。
