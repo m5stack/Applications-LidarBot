@@ -111,7 +111,7 @@ void loop()
 
 ## 2、原理图
 
-![image](./LidarBot//Schematic_Diagram/576571642811095946.jpg)
+<img src="https://raw.githubusercontent.com/m5stack/Applications-LidarBot/master/LidarBot/Schematic_Diagram/lidarbot_04.png" width="500" height="500">
 
 
 ## 3、源码
