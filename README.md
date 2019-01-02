@@ -62,7 +62,8 @@ void loop()
       #include "rprtrack.h"
       Rprtrack rprtrack;
 
-      Rprtrack();
+      SensorStatus();// 巡线数值保存到数组sensorValue[]
+      CalTrackDev();// 处理数组sensorValue[]，得出小车偏移情况，保存至变量OffsetLine
       ```
 
    * ESP_NOW的使用
@@ -102,7 +103,7 @@ void loop()
       #include "accessport.h"
       AccessPort accessport;
 
-      accessport.AnalzyCommand();
+      accessport.AnalzyCommand();// 发送地图数据给PC上位机
       ```
 
 ## 1、开发环境安装
