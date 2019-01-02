@@ -1,0 +1,185 @@
+文件夹 PATH 列表
+卷序列号为 00000036 0009:724F
+D:.
+│  list.txt
+│  README.md
+│  
+└─LidarBot
+    │  list.txt
+    │  
+    ├─Example
+    │  ├─LidarBot_CarMain_V1.1
+    │  │      espnow.cpp
+    │  │      espnow.h
+    │  │      LidarBot_CarMain_V1.1.ino
+    │  │      LidarCar.cpp
+    │  │      LidarCar.h
+    │  │      logo.bmp
+    │  │      logo.c
+    │  │      RprTrack.cpp
+    │  │      RprTrack.h
+    │  │      
+    │  ├─LidarBot_RemoteController_V1.0
+    │  │      BK.bmp
+    │  │      BK.c
+    │  │      LidarBot_RemoteController.ino
+    │  │      ROLL.bmp
+    │  │      ROLL.c
+    │  │      UI.cdr
+    │  │      UNROLL.bmp
+    │  │      UNROLL.c
+    │  │      w0.bmp
+    │  │      w0.c
+    │  │      w1.bmp
+    │  │      w1.c
+    │  │      w2.bmp
+    │  │      w2.c
+    │  │      w3.bmp
+    │  │      w3.c
+    │  │      w4.bmp
+    │  │      w4.c
+    │  │      w5.bmp
+    │  │      w5.c
+    │  │      w6.bmp
+    │  │      w6.c
+    │  │      w7.bmp
+    │  │      w7.c
+    │  │      w_1.bmp
+    │  │      w_1.c
+    │  │      w_2.bmp
+    │  │      w_2.c
+    │  │      w_3.bmp
+    │  │      w_3.c
+    │  │      w_4.bmp
+    │  │      w_4.c
+    │  │      w_5.bmp
+    │  │      w_5.c
+    │  │      w_6.bmp
+    │  │      w_6.c
+    │  │      w_7.bmp
+    │  │      w_7.c
+    │  │      备份UI.cdr
+    │  │      控制参数表.xlsx
+    │  │      
+    │  └─LidarBot_RemoteController_V1.2
+    │          accessport.cpp
+    │          accessport.h
+    │          espnow.cpp
+    │          espnow.h
+    │          keyboard.cpp
+    │          keyboard.h
+    │          LidarBotRemote_M5.ino
+    │          LidarBot_RemoteController_V1.2.ino
+    │          logo.bmp
+    │          logo.c
+    │          备份UI.cdr
+    │          控制参数表.xlsx
+    │          
+    ├─Firmware
+    │  ├─LidarBot_Bottom_FW
+    │  │  └─MCAR328
+    │  │          MCAR328.ino
+    │  │          
+    │  └─LidarBot_Remote_FW
+    │      └─FaceJoystick328
+    │              FaceJoystick328.ino
+    │              FaceJoystick328.ino.eightanaloginputs.hex
+    │              FaceJoystick328.ino.with_bootloader.eightanaloginputs.hex
+    │              FaceJoystick328_old.hex
+    │              
+    ├─Product_Picture
+    │      403212353277269881.jpg
+    │      545126402675232250.jpg
+    │      785202095111185304.jpg
+    │      
+    ├─Schematic_Diagram
+    │      576571642811095946.jpg
+    │      
+    └─SComAssistant
+        │  ReadMe.docx
+        │  
+        ├─LidarBot-AccessPort
+        │  │  ComTool.exe
+        │  │  ComTool_Config.ini
+        │  │  D3Dcompiler_47.dll
+        │  │  libEGL.dll
+        │  │  libgcc_s_dw2-1.dll
+        │  │  libGLESV2.dll
+        │  │  libstdc++-6.dll
+        │  │  libwinpthread-1.dll
+        │  │  opengl32sw.dll
+        │  │  Qt5Core.dll
+        │  │  Qt5Gui.dll
+        │  │  Qt5Network.dll
+        │  │  Qt5Svg.dll
+        │  │  Qt5Widgets.dll
+        │  │  
+        │  ├─bearer
+        │  │      qgenericbearer.dll
+        │  │      qnativewifibearer.dll
+        │  │      
+        │  ├─iconengines
+        │  │      qsvgicon.dll
+        │  │      
+        │  ├─imageformats
+        │  │      qgif.dll
+        │  │      qicns.dll
+        │  │      qico.dll
+        │  │      qjpeg.dll
+        │  │      qsvg.dll
+        │  │      qtga.dll
+        │  │      qtiff.dll
+        │  │      qwbmp.dll
+        │  │      qwebp.dll
+        │  │      
+        │  ├─platforms
+        │  │      qwindows.dll
+        │  │      
+        │  └─translations
+        │          qt_ca.qm
+        │          qt_cs.qm
+        │          qt_de.qm
+        │          qt_en.qm
+        │          qt_fi.qm
+        │          qt_fr.qm
+        │          qt_he.qm
+        │          qt_hu.qm
+        │          qt_it.qm
+        │          qt_ja.qm
+        │          qt_ko.qm
+        │          qt_lv.qm
+        │          qt_pl.qm
+        │          qt_ru.qm
+        │          qt_sk.qm
+        │          qt_uk.qm
+        │          
+        └─resource
+            │  app.cpp
+            │  app.h
+            │  com.pro
+            │  com.pro.user
+            │  frmcomtool.cpp
+            │  frmcomtool.h
+            │  frmcomtool.ui
+            │  main.cpp
+            │  main.ico
+            │  main.qrc
+            │  main.rc
+            │  myhelper.h
+            │  picturebox.cpp
+            │  picturebox.h
+            │  
+            ├─file
+            │      device.txt
+            │      send.txt
+            │      
+            └─qextserialport
+                    qextserialport.cpp
+                    qextserialport.h
+                    qextserialport.pri
+                    qextserialport_global.h
+                    qextserialport_p.h
+                    qextserialport_unix.cpp
+                    qextserialport_win.cpp
+                    readme.txt
+                    
