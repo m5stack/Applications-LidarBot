@@ -4,9 +4,13 @@
 ## 目录树
 
 └─LidarBot
+
     ├─Example
+
     │  ├─LidarBot_CarMain_V1.1 - 雷达车主控程序
+
     │  ├─LidarBot_RemoteController_V1.0 - 遥控手柄程序V1.0
+
     │  └─LidarBot_RemoteController_V1.2 - 遥控手柄程序V1.2(相比V1.0精度提高一倍)
     │
     ├─Firmware(底层MEGA328P固件，使用时可忽略)
