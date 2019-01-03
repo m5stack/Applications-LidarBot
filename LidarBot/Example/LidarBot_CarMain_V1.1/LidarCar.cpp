@@ -13,7 +13,7 @@ LidarCar::LidarCar(){
 }
 
 void LidarCar::Init(void){
-  
+
   for (int i = 0; i < 16; i++){
     setLedColor(i, 20, 20, 20);
     delay(15);
@@ -41,6 +41,24 @@ void LidarCar::setLedColor(byte i, byte r, byte g, byte b){
   Serial2.write(0x55);
 }
 
+void LidarCar::setFrontLedBar( byte r, byte g, byte b)
+{
+  Serial2.write(0xAC);
+  Serial2.write(r);
+  Serial2.write(g);
+  Serial2.write(b);
+  Serial2.write(0x55);
+}
+
+void LidarCar::setBackLedBar( byte r, byte g, byte b)
+{
+  Serial2.write(0xAD);
+  Serial2.write(r);
+  Serial2.write(g);
+  Serial2.write(b);
+  Serial2.write(0x55);
+}
+
 void LidarCar::setLedAll( byte r, byte g, byte b)
 {
   Serial2.write(0xAE);
@@ -50,9 +68,25 @@ void LidarCar::setLedAll( byte r, byte g, byte b)
   Serial2.write(0x55);
 }
 
+void LidarCar::setServo0Angle(uint8_t angle)// angle: 0 ~ 180
+{
+  if(angle > 180) angle = 180;
+  if(angle < 0) angle = 0;
+  Serial2.write(0xAF);
+  Serial2.write(angle);
+  Serial2.write(0x55);
+}
 
+void LidarCar::setServo1Angle(uint8_t angle)// angle: 0 ~ 180
+{
+  if(angle > 180) angle = 180;
+  if(angle < 0) angle = 0;
+  Serial2.write(0xB0);
+  Serial2.write(angle);
+  Serial2.write(0x55);
+}
 
-void LidarCar::ControlWheel(int8_t X, int8_t Y, byte A)
+void LidarCar::ControlWheel(int8_t X, int8_t Y, byte A)// X, Y, A: -7 ~ 7
 {
   if (A == 0x01){
     wheelPowerA = controlMapX[7 + Y][X + 7];
@@ -84,8 +118,8 @@ void LidarCar::ControlWheel(int8_t X, int8_t Y, byte A)
    else
       setLedAll(0,0,-Y);
   }
- 
-} 
+
+}
 
 void LidarCar::MapDisplay(void){
   M5.Lcd.setCursor(0, 0, 2);
@@ -143,12 +177,12 @@ void LidarCar::GetData(void){
               }
               break;
       case 1: if(r == 0x00) {
-               commandStatus = 2; 
+               commandStatus = 2;
                }
               else{
-                commandStatus = 0; 
+                commandStatus = 0;
               }
-              break; 
+              break;
        case 2:commandStatus = 3;break;
        case 3: ver = r; commandStatus = 4; break;
        case 4:if(r == 0x61){
@@ -162,7 +196,7 @@ void LidarCar::GetData(void){
                 commandStatus = 6;
                }else{
                 commandStatus = 0;
-               } 
+               }
                break;
         case 6: commandStatus = 7;  break;
         case 7: dataLength = (r - 5) / 3; commandStatus = 8; break;
@@ -171,7 +205,7 @@ void LidarCar::GetData(void){
         case 10: angleOffset += r; commandStatus = 11;  break;
         case 11: startAngle = r * 256; commandStatus = 12; break;
         case 12: startAngle += r; commandStatus = 13;  break;
-    
+
     default:
         if (commandStatus == ( 14 + 3 * 44)) //finish.
         {

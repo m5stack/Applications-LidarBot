@@ -109,26 +109,26 @@ void loop()
       accessport.AnalzyCommand();// 发送地图数据给PC上位机
       ```
 
-## 1、开发环境安装
+## 开发环境安装
    点击链接：[https://github.com/m5stack/M5Stack](https://github.com/m5stack/M5Stack)
 
-## 2、原理图
+## 原理图
 
 <img src="https://raw.githubusercontent.com/m5stack/Applications-LidarBot/master/LidarBot/Schematic_Diagram/lidarbot_04.png" width="500" height="500">
 
 
-## 3、源码
+## 源码
 
    雷达车：[Bot](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_CarMain_V1.1)
 
    遥控器：[Remote](https://github.com/m5stack/Applications-LidarBot/blob/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
 
-## 4、上位机
+## 上位机
    新加上位机调试功能。
 
    功能一：实时显示LidarBot地图。
 
-## 5、激光车示图
+## 激光车示图
 
 **长：142mm， 宽：117mm， 高：120mm**
 

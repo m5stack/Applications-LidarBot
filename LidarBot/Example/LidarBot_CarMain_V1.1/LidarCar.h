@@ -71,7 +71,11 @@ class LidarCar {
    uint16_t distance[360];
  private:
    void setLedColor(byte i, byte r, byte g, byte b);
+   void setFrontLedBar( byte r, byte g, byte b);
+   void setBackLedBar( byte r, byte g, byte b);
    void setLedAll( byte r, byte g, byte b);
+   void setServo0Angle(uint8_t angle);
+   void setServo1Angle(uint8_t angle);
 
  private:
    int disX[360], disY[360];
