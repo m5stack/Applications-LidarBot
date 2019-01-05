@@ -132,6 +132,10 @@ void LidarCar::MapDisplay(void){
 
   for(int i = 0; i < 45; i++)
   {
+    if (showAngle >=  359){
+       Cortrol_flag = true;count++;
+    }
+      
     if(showAngle >= 359)
       showAngle = 0;
     else
@@ -159,11 +163,152 @@ void LidarCar::MapDisplay(void){
     mapdata[i * 4 + 2] = 236;
     mapdata[i * 4 + 3] = 236;
     #endif
-  }
+	
+	
+	  if((showAngle >= 180) && (showAngle <= 360)){
+      if((distance[showAngle] == 250)||(distance[showAngle] == 0)||(distance[showAngle] >= 10000))
+      {
+         Dis[showAngle - 180][0] = 0;
+         Dis[showAngle - 180][1] = 0;
+      }
+      else
+      {
+        Dis[showAngle - 180][0] = disX[showAngle];
+        Dis[showAngle - 180][1] = disY[showAngle];
+      } 
+     }
+       
+   }
 
   GetData();
 
 }
+void LidarCar::CarMaze(void){
+if((Cortrol_flag) && (count >= 10))
+  {
+   CarCortrol();
+   Cortrol_flag = false;
+   count = 10;
+  }
+  if((count >= 10))
+    ControlWheel(motor_out,motor_y_out, 0); 
+}
+void LidarCar::CarCortrol(void)
+{
+    float left_line = 0,right_line = 0,front_line = 0;
+    int buf = 0; 
+    
+    int count = 0;
+    for(int i = 0;i < 55;i++)
+    {
+       if(Dis[i][0])
+       {
+        buf += Dis[i][0];
+         //Serial.print(" left_line = ");Serial.println(left_line);
+        count++;
+        //delay(1);
+       }
+    }
+   // Serial.print("left_line  count = "),Serial.println(count);
+    if(count == 0)count = 1;
+    left_line = (float)buf/count;
+ 
+    buf = 0;
+    count = 0;
+    for(int i = 55;i < 105;i++)
+    {
+       if(Dis[i][1])
+       {
+         buf += Dis[i][1];
+         count++;
+       }
+      
+    }//Serial.print("front_line  count = "),Serial.println(count);
+    if(count == 0)count = 1;
+    front_line = (float)buf/count;
+
+    count = 0;
+    buf = 0;
+    for(int i = 105;i < 180;i++)
+    {
+      if(Dis[i][0])
+       {
+        buf += Dis[i][0];
+        count++;
+       }
+    }//Serial.print("right_line  count = "),Serial.println(count);
+    if(count == 0)count = 1;
+    right_line = buf /count;
+
+    
+    float kp = 0.4;motor_y_out = 7;
+    if((right_line <= 1.0) || (left_line <= 1.0))
+    {
+      kp = 1;
+      motor_y_out = 4;
+    }
+    if((front_line >= 170.0) || (front_line <= 1.0))
+    {
+      kp = 1;
+      motor_y_out = 3;
+    }
+
+    
+    float error_line = (left_line + right_line)/2.0 - 157.80;
+    if((left_line == 0) || (right_line == 0))error_line = last_error_line;
+    last_error_line = error_line;
+    //if(error_line)
+    //common
+    int ret = 0;
+    ret = MazaCom(error_line ,left_line,right_line,front_line) ;
+    if(!ret){
+      if(go_flag)
+    motor_out =  -kp  * error_line/2;
+    else
+    motor_out =  kp  * error_line;
+    if(motor_out >= 4.0)motor_out = 4.0;
+    else if(motor_out <= -4.0)motor_out = -4.0;
+    ControlWheel(motor_out,motor_y_out, 0);
+    }
+}
+
+int LidarCar::MazaCom(float error_line,float left_line,float right_line,float front_line)
+{
+   //Serial.print(" error_line = ");Serial.print(error_line);Serial.print(" left_line = ");Serial.print(left_line);Serial.print(" right_line = ");Serial.print(right_line);Serial.print(" front_line = ");Serial.println(front_line);
+
+
+   static int stop_count;
+   if(((abs(error_line) <= 4.0) &&  (front_line >= 180.0))  &&(((right_line <= 190)) || (left_line >= 120.0)))
+   {
+      motor_out = 0;
+      motor_y_out = 0;
+      stop_count++;
+      
+      if(stop_count>=50)
+      {
+        motor_out = 1;
+        motor_y_out = 0;
+        stop_count = 50;
+      }
+      setLedAll(20, 0, 0);
+      return 1;
+   }
+
+
+   if((stop_count >= 50) && ((abs(error_line) >= 5.0) ||  ((front_line >= 160.0)  ||  (front_line <= 1.0))))
+   {
+        motor_out = 1;
+        motor_y_out = 0;
+        return 1;
+   }
+   setLedAll(0, 0, 0);
+   
+   
+   stop_count = 0;
+   return 0;
+    
+}
+
 
 void LidarCar::GetData(void){
 

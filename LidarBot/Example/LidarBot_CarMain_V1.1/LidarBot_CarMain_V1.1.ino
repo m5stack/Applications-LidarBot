@@ -44,5 +44,6 @@ void loop()
 {
   espnow.BotConnectUpdate();
   lidarcar.MapDisplay();
+  lidarcar.CarMaze();
   esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);
 }

@@ -66,9 +66,14 @@ class LidarCar {
    void ControlWheel(int8_t X, int8_t Y, byte A);
    void GetData(void);
    void MapDisplay(void);
+   void CarCortrol(void);
+   void CarMaze(void);
  public:
    uint8_t mapdata[180];
    uint16_t distance[360];
+   float motor_out = 0,motor_y_out = 0;
+   int Cortrol_flag = 0;int count = 0;
+   float last_error_line = 0;
  private:
    void setLedColor(byte i, byte r, byte g, byte b);
    void setFrontLedBar( byte r, byte g, byte b);
@@ -76,10 +81,13 @@ class LidarCar {
    void setLedAll( byte r, byte g, byte b);
    void setServo0Angle(uint8_t angle);
    void setServo1Angle(uint8_t angle);
+   int MazaCom(float error_line,float left_line,float right_line,float front_line);
 
  private:
+   int go_flag = 0;
    int disX[360], disY[360];
    int oldDisX[360], oldDisY[360];
+   int Dis[180][2];
    int commandStatus;
    int ver;
    uint16_t dataLength;
