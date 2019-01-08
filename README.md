@@ -59,6 +59,12 @@ void loop()
       GetData();//得到雷达保存到数组distance[]
       ```
 
+   * 迷宫的使用
+
+      ```arduino
+      lidarcar.CarMaze(); //迷宫执行函数
+      ```
+
    * 循迹的使用
 
       ```arduino
