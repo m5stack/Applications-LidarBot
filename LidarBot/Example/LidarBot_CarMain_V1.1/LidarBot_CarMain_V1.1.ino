@@ -7,6 +7,7 @@
 I2C i2c;
 Espnow espnow;
 LidarCar lidarcar;
+
 extern const unsigned char gImage_logo[];
 
 void setup() {
@@ -30,6 +31,7 @@ void setup() {
 
   //!Camrea
   i2c.master_start();
+}
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status){
 }
