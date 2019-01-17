@@ -1,4 +1,3 @@
-//#include"espnow.h
 #include"espnow.h"
 #include<M5Stack.h>
 #include<WiFi.h>
@@ -100,7 +99,7 @@ void Espnow::ConfigDeviceAP(void)
  
   String Mac = WiFi.macAddress();
   String SSID = "Slave:"+ Mac;
-  bool result = WiFi.softAP(SSID.c_str(), "12345678", CHANNEL, 0);
+  bool result = WiFi.softAP(SSID.c_str(), "12345678", 5, 0);
   if (!result)
   {
     Serial.println("AP Config failed.");

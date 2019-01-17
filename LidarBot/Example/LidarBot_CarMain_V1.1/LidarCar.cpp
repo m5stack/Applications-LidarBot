@@ -1,5 +1,7 @@
 #include "lidarcar.h"
 
+uint8_t rent_pp[9];
+
 LidarCar::LidarCar(){
   //commandType = 0;
   commandStatus = 0;
@@ -183,6 +185,48 @@ void LidarCar::MapDisplay(void){
   GetData();
 
 }
+
+
+void LidarCar::CarCamera(void){
+
+   //Serial.print(" rent_pp = ");
+   //for(int i = 0; i < 9;i++)
+     //Serial.println(rent_pp[i]);
+     
+  uint8_t max_data = rent_pp[0];
+  uint8_t max_num = 0;
+  for(int i = 1; i < 9; i++){
+    if(rent_pp[i]>max_data){
+      max_data = rent_pp[i];
+      max_num = i;
+    }
+  }
+  /*
+  Serial.print(" max_data = ");
+  Serial.println(max_data);
+  Serial.print(" max_num = ");
+  Serial.println(max_num);
+*/
+  
+  if(max_data <= 5){
+    last_motor_out = motor_out;
+  }else{
+    motor_out = (max_num % 3 - 1);
+  }
+  if(max_data > 95){
+   //ControlWheel(0, 0, 0);
+   ControlWheel(0,-2, 0);
+  }
+  else{
+    if(max_data <= 5)
+    ControlWheel(last_motor_out,0, 0);
+    else
+    ControlWheel(motor_out,2, 0);
+  }
+  
+         
+}
+
 void LidarCar::CarMaze(void){
 if((Cortrol_flag) && (count >= 10))
   {

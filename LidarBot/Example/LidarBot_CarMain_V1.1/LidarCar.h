@@ -1,6 +1,7 @@
 #ifndef __LIDAR_H__
 #define __LIDAR_H__
 #include <M5Stack.h>
+//uint8_t  rent_pp[9];
 /*
 int controlMap[15][15] =
 {
@@ -68,10 +69,12 @@ class LidarCar {
    void MapDisplay(void);
    void CarCortrol(void);
    void CarMaze(void);
+   void CarCamera();
  public:
    uint8_t mapdata[180];
    uint16_t distance[360];
    float motor_out = 0,motor_y_out = 0;
+   float last_motor_out;
    int Cortrol_flag = 0;int count = 0;
    float last_error_line = 0;
  private:
@@ -82,6 +85,7 @@ class LidarCar {
    void setServo0Angle(uint8_t angle);
    void setServo1Angle(uint8_t angle);
    int MazaCom(float error_line,float left_line,float right_line,float front_line);
+   
 
  private:
    int go_flag = 0;
