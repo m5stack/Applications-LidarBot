@@ -21,7 +21,8 @@ void Espnow::BotInit(void){
  // digitalWrite(38, HIGH);
   //digitalWrite(39, HIGH);
 
-  WiFi.mode(WIFI_STA);
+  //WiFi.mode(WIFI_STA);
+  WiFi.mode(WIFI_AP_STA);//WIFI_AP_STA
   Serial.println("ESPNow Master Example");
   // This is the mac address of the Master in Station Mode
   Serial.print("STA MAC: ");

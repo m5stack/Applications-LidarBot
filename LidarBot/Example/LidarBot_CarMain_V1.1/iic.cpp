@@ -1,6 +1,7 @@
 #include"iic.h"
 
 SemaphoreHandle_t print_mux = NULL;
+xTaskHandle master_xHandle;
 I2C::I2C(void)
 {
   //print_mux = NULL;
@@ -293,9 +294,9 @@ void I2C::master_task(void* arg)
             printf("====TASK[%d] Slave buffer data ====\n", task_idx);
             //disp_buf(data, RW_TEST_LENGTH);
             printf("====TASK[%d] Master read ====\n", task_idx);
-            disp_buf(data_rd, 9);
+            disp_buf(data_rd, 29);
            #else
-             for(int i = 0; i < 9; i++){  
+             for(int i = 0; i < 29; i++){  
                rent_pp[i] = data_rd[i];
              }
            #endif
@@ -333,7 +334,21 @@ void I2C::test_start(){
 void I2C::master_start(){
   print_mux = xSemaphoreCreateMutex();
   master_init();
-  xTaskCreate(master_task, "master_task", 1024 * 2, (void* ) 0, 10, NULL);
+  xTaskCreate(master_task, "master_task", 1024 * 2, (void* ) 0, 10, &master_xHandle);
+}
+
+
+void I2C::master_hangs(){
+  //print_mux = xSemaphoreCreateMutex();
+  //master_init();
+  //xTaskCreate(master_task, "master_task", 1024 * 2, (void* ) 0, 10, &master_xHandle);
+  vTaskSuspend(master_xHandle); 
+}
+void I2C::master_recovery(){
+  //print_mux = xSemaphoreCreateMutex();
+  //master_init();
+  //xTaskCreate(master_task, "master_task", 1024 * 2, (void* ) 0, 10, &master_xHandle);
+   vTaskResume(master_xHandle); 
 }
 void I2C::slave_start(){
   print_mux = xSemaphoreCreateMutex();

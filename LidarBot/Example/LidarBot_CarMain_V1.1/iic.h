@@ -31,8 +31,8 @@
 #define NACK_VAL                           0x1              /*!< I2C nack value */
 
 //SemaphoreHandle_t print_mux = NULL;
-extern uint8_t sent_pp[9];
-extern uint8_t rent_pp[9];
+extern uint8_t sent_pp[29];
+extern uint8_t rent_pp[29];
 
 class I2C{
   public:
@@ -53,7 +53,8 @@ class I2C{
     void test_start();
     void master_start();
     void slave_start();
-    
+    void master_hangs();
+    void master_recovery();
   public:
    //static SemaphoreHandle_t print_mux;
   private:

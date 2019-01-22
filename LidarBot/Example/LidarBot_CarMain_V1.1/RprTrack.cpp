@@ -22,6 +22,11 @@ void Rprtrack::SensorStatus(void){
   sensorValue[1] = (level&0x04)>>2;
   sensorValue[2] = (level&0x02)>>1;
   sensorValue[3] = (level&0x01)>>0;
+
+  //Serial.print(" OffsetLine 0 = ");Serial.println(sensorValue[0]);
+ // Serial.print(" OffsetLine 1 = ");Serial.println(sensorValue[1]);
+  //Serial.print(" OffsetLine 2 = ");Serial.println(sensorValue[2]);
+  //Serial.print(" OffsetLine 3 = ");Serial.println(sensorValue[3]);
 }
 
 
@@ -29,7 +34,6 @@ void Rprtrack::CalTrackDev(void)
 {
   //OffsetLine;
   //LastOffsetLine;
-
   if((sensorValue[0])&&(!sensorValue[1])&&(!sensorValue[2])&&(sensorValue[3]))
     OffsetLine = 0;
   else if((sensorValue[0])&&(!sensorValue[1])&&(sensorValue[2])&&(sensorValue[3]))
@@ -54,6 +58,5 @@ void Rprtrack::CalTrackDev(void)
     OffsetLine = LastOffsetLine;
   } 
     //if(OffsetLine == 0)
-    LastOffsetLine = OffsetLine;
-    
+    LastOffsetLine = OffsetLine;   
 }

@@ -1,11 +1,12 @@
 #ifndef __RPRTRACK_H__
 #define __RPRTRACK_H__
-
+#include <M5Stack.h>
 class Rprtrack {
 
    
 public:
    Rprtrack();
+   void TrackControl(void);
    void SensorStatus(void);
    void CalTrackDev(void);
   /*

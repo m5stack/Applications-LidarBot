@@ -1,7 +1,7 @@
 #include "lidarcar.h"
 
-uint8_t rent_pp[9];
-
+uint8_t rent_pp[29];
+Rprtrack rprtrack;
 LidarCar::LidarCar(){
   //commandType = 0;
   commandStatus = 0;
@@ -189,12 +189,15 @@ void LidarCar::MapDisplay(void){
 
 void LidarCar::CarCamera(void){
 
-   //Serial.print(" rent_pp = ");
-   //for(int i = 0; i < 9;i++)
-     //Serial.println(rent_pp[i]);
-     
-  uint8_t max_data = rent_pp[0];
-  uint8_t max_num = 0;
+   Serial.print(" rent_pp = ");
+   for(int i = 9; i < 29;i++){
+    Serial.print(i);
+    Serial.print(" = ");
+    Serial.println(rent_pp[i]);
+   }
+    uint8_t max_data = rent_pp[0];
+    uint8_t max_num = 0;
+#if 0     
   for(int i = 1; i < 9; i++){
     if(rent_pp[i]>max_data){
       max_data = rent_pp[i];
@@ -214,19 +217,84 @@ void LidarCar::CarCamera(void){
     motor_out = (max_num % 3 - 1);
   }
   if(max_data > 95){
-   //ControlWheel(0, 0, 0);
-   ControlWheel(0,-2, 0);
+   ControlWheel(0,-2,0);
   }
   else{
     if(max_data <= 5)
-    ControlWheel(last_motor_out,0, 0);
+      ControlWheel(last_motor_out,0, 0);
     else
-    ControlWheel(motor_out,2, 0);
+      ControlWheel(motor_out,2, 0);
+  } 
+#else
+  for(int i = 1; i < 9; i++){
+    if(rent_pp[i]>max_data){
+      max_data = rent_pp[i];
+      //max_num = i;
+    }
   }
-  
-         
+  uint8_t max_data_ = rent_pp[9];
+  for(int i = 9; i < 29; i++){
+    if(i <= 19){
+      if(rent_pp[i]>=max_data_){
+        max_data_ = rent_pp[i];
+        max_num = i - 9;
+      }
+    }
+    else
+    {
+      if(rent_pp[i]>max_data_){
+        max_data_ = rent_pp[i];
+        max_num = i - 9;
+      }
+    }
+  }
+  int line = 0;
+  if(max_data_ < 50){
+    line = last_line;
+  }
+  else
+  {
+    line = max_num - 10;   
+  }
+  //if(!line)  line = last_line;
+  Serial.print(" line = ");Serial.println(line);
+ if((max_data > 80) || ((max_data < 5)&&(!line))){
+    ControlWheel(0, 0, 0);
+  }else{
+  if(abs(line) < 2)
+     ControlWheel(0, 2, 0);
+  else if(abs(line) < 5){
+    if(line >= 0)
+     ControlWheel(1,2, 0);
+     else
+     ControlWheel(-1, 2, 0);
+  }else{
+     if(line >= 0)
+       ControlWheel(2 ,2, 0);
+     else
+       ControlWheel(-2 ,2, 0);
+  }
+  }
+ last_line = line;
+#endif     
 }
 
+void LidarCar::TrackControl(void){
+  
+  rprtrack.SensorStatus();
+  rprtrack.CalTrackDev();
+ // Serial.print(" OffsetLine = ");Serial.println(rprtrack.OffsetLine);
+  M5.Lcd.setCursor(300, 0, 2);
+  M5.Lcd.print(rprtrack.OffsetLine);
+  if(abs(rprtrack.OffsetLine) == 0)
+   ControlWheel(rprtrack.OffsetLine,4, 0);
+  else if(abs(rprtrack.OffsetLine) == 1)
+   ControlWheel(rprtrack.OffsetLine,2, 0);
+  else if(abs(rprtrack.OffsetLine) == 2)
+   ControlWheel(rprtrack.OffsetLine,2, 0);
+  else 
+   ControlWheel(rprtrack.OffsetLine,1, 0);
+}
 void LidarCar::CarMaze(void){
 if((Cortrol_flag) && (count >= 10))
   {
@@ -235,7 +303,7 @@ if((Cortrol_flag) && (count >= 10))
    count = 10;
   }
   if((count >= 10))
-    ControlWheel(motor_out,motor_y_out, 0); 
+    ControlWheel(motor_out, motor_y_out, 0); 
 }
 void LidarCar::CarCortrol(void)
 {
@@ -296,8 +364,7 @@ void LidarCar::CarCortrol(void)
       kp = 1;
       motor_y_out = 3;
     }
-
-    
+  
     float error_line = (left_line + right_line)/2.0 - 157.80;
     if((left_line == 0) || (right_line == 0))error_line = last_error_line;
     last_error_line = error_line;
@@ -320,7 +387,6 @@ int LidarCar::MazaCom(float error_line,float left_line,float right_line,float fr
 {
    //Serial.print(" error_line = ");Serial.print(error_line);Serial.print(" left_line = ");Serial.print(left_line);Serial.print(" right_line = ");Serial.print(right_line);Serial.print(" front_line = ");Serial.println(front_line);
 
-
    static int stop_count;
    if(((abs(error_line) <= 4.0) &&  (front_line >= 180.0))  &&(((right_line <= 190)) || (left_line >= 120.0)))
    {
@@ -338,7 +404,6 @@ int LidarCar::MazaCom(float error_line,float left_line,float right_line,float fr
       return 1;
    }
 
-
    if((stop_count >= 50) && ((abs(error_line) >= 5.0) ||  ((front_line >= 160.0)  ||  (front_line <= 1.0))))
    {
         motor_out = 1;
@@ -346,11 +411,8 @@ int LidarCar::MazaCom(float error_line,float left_line,float right_line,float fr
         return 1;
    }
    setLedAll(0, 0, 0);
-   
-   
    stop_count = 0;
-   return 0;
-    
+   return 0;   
 }
 
 
