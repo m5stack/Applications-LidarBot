@@ -18,7 +18,6 @@ void Service(void * pvParameters) {
     for(;;) {
         service.Listen();
         vTaskDelay(2 / portTICK_RATE_MS); 
-        //Serial.println("Service2");
     }
     vTaskDelete(NULL);
 }
@@ -53,16 +52,17 @@ void setup() {
 
   //!Service
   xTaskCreatePinnedToCore(
-                    Service,     /* Function to implement the task */
-                    "Service",   /* Name of the task */
-                    40960,      /* Stack size in words */
-                    NULL,      /* Task input parameter */
-                    5,         /* Priority of the task */
-                    NULL,      /* Task handle. */
+                    Service,
+                    "Service",
+                    40960,
+                    NULL, 
+                    5,        
+                    NULL,
                     0); 
 }
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status){
+  
 }
 int flag = 0;
 void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len)
@@ -79,16 +79,15 @@ void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len)
 
 void loop()
 {
-  //lidarcar.MapDisplay();
-  
   espnow.BotConnectUpdate();
+  lidarcar.MapDisplay();
+  //lidarcar.ControlMode();
   
   if(digitalRead(37) == LOW){
    flag++;
    if(flag >= 4) flag = 0;
    while(digitalRead(37) == LOW);
   }
-  lidarcar.MapDisplay();
   
   if(flag == 0){ 
     i2c.master_hangs();

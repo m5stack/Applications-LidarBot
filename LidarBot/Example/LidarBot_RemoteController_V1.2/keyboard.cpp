@@ -55,7 +55,7 @@ void KeyBoard::GetValue(void){
       }
       else return;
     }
-
+#if 0
    //Serial.printf("dconsoleX:%d   dconsoleY:%d\n", adX, adY);
     switch ((adX - 162) / 40)
     {
@@ -110,6 +110,62 @@ void KeyBoard::GetValue(void){
       case 18: consoleY = 7; break;
       case 19: consoleY = 7; break;
     }
+    #else
+  switch ((adX - 162) / 40)
+    {
+      case -3: consoleX = -5; break;
+      case -2: consoleX = -5; break;
+      case -1: consoleX = -5; break;
+      case 0:  consoleX = -5; break;
+      case 1:  consoleX = -5; break;
+      case 2:  consoleX = -5; break;
+      case 3:  consoleX = -4; break;
+      case 4:  consoleX = -3; break;
+      case 5:  consoleX = -2; break;
+      case 6:  consoleX = -1; break;
+      case 7:  consoleX = 0; break;
+      case 8:  consoleX = 0; break;
+      case 9:  consoleX = 0; break;
+      case 10: consoleX = 1; break;
+      case 11: consoleX = 2; break;
+      case 12: consoleX = 3; break;
+      case 13: consoleX = 4; break;
+      case 14: consoleX = 5; break;
+      case 15: consoleX = 5; break;
+      case 16: consoleX = 5; break;
+      case 17: consoleX = 5; break;
+      case 18: consoleX = 5; break;
+      case 19: consoleX = 5; break;
+    }
+    //adconsoleY  min = 199 maconsoleX = 872 admed = 509 - 522
+    switch ((adY - 213) / 40)
+    {  
+      case -3: consoleY = -5; break;
+      case -2: consoleY = -5; break;
+      case -1: consoleY = -5; break;
+      case 0:  consoleY = -5; break;
+      case 1:  consoleY = -5; break;
+      case 2:  consoleY = -5; break;
+      case 3:  consoleY = -4; break;
+      case 4:  consoleY = -3; break;
+      case 5:  consoleY = -2; break;
+      case 6:  consoleY = -1; break;
+      case 7:  consoleY = 0; break;
+      case 8:  consoleY = 0; break;
+      case 9:  consoleY = 0; break;
+      case 10: consoleY = 1; break;
+      case 11: consoleY = 2; break;
+      case 12: consoleY = 3; break;
+      case 13: consoleY = 4; break;
+      case 14: consoleY = 5; break;
+      case 15: consoleY = 5; break;
+      case 16: consoleY = 5; break;
+      case 17: consoleY = 5; break;
+      case 18: consoleY = 5; break;
+      case 19: consoleY = 5; break;
+    }
+    
+    #endif
    }else{
       
    }

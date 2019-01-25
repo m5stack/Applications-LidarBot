@@ -68,11 +68,7 @@ void loop()
    * 循迹的使用
 
       ```arduino
-      #include "rprtrack.h"
-      Rprtrack rprtrack;
-
-      SensorStatus();// 巡线数值保存到数组sensorValue[]
-      CalTrackDev();// 处理数组sensorValue[]，得出小车偏移情况，保存至变量OffsetLine
+      lidarcar.TrackControl(); //循迹执行函数
       ```
 
    * ESP_NOW的使用

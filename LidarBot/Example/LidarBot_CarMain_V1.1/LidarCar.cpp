@@ -254,28 +254,35 @@ void LidarCar::CarCamera(void){
   }
   else
   {
-    line = max_num - 10;   
+    line = max_num - 10;
+    last_line = line;   
   }
-  //if(!line)  line = last_line;
-  Serial.print(" line = ");Serial.println(line);
- if((max_data > 80) || ((max_data < 5)&&(!line))){
+  if(line > 50 || line < -50)  return;
+  M5.Lcd.setCursor(300, 0, 2);
+  M5.Lcd.printf("%2d",line);
+  //Serial.print(" line = ");Serial.println(line);
+ if((max_data > 40) || ((max_data < 5)&&(!line))){
+    if(max_data > 55)
+    ControlWheel(0, -2, 0);
+    else
     ControlWheel(0, 0, 0);
   }else{
   if(abs(line) < 2)
      ControlWheel(0, 2, 0);
   else if(abs(line) < 5){
     if(line >= 0)
-     ControlWheel(1,2, 0);
+     ControlWheel(2,1, 0);
      else
-     ControlWheel(-1, 2, 0);
+     ControlWheel(-2, 1, 0);
   }else{
      if(line >= 0)
        ControlWheel(2 ,2, 0);
      else
        ControlWheel(-2 ,2, 0);
+     }
   }
-  }
- last_line = line;
+  
+ // last_line = line;
 #endif     
 }
 
@@ -415,6 +422,22 @@ int LidarCar::MazaCom(float error_line,float left_line,float right_line,float fr
    return 0;   
 }
 
+void LidarCar::ControlMode(void){
+
+  //!mode flag
+  if(digitalRead(37) == LOW){
+   contro_mode++;
+   if(contro_mode >= 4) contro_mode = 0;
+   while(digitalRead(37) == LOW);
+  }
+
+  Serial.print("contro_mode = ");Serial.println(contro_mode);
+
+  switch(contro_mode){
+    case 0:break;
+    default:break;
+  }
+}
 
 void LidarCar::GetData(void){
 

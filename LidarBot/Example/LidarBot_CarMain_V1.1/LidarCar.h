@@ -9,6 +9,7 @@ class LidarCar {
  public:
    LidarCar();
    void Init(void);
+   void ControlMode(void);
    void ControlWheel(int8_t X, int8_t Y, byte A);
    void GetData(void);
    void MapDisplay(void);
@@ -23,6 +24,7 @@ class LidarCar {
    float last_motor_out;
    int Cortrol_flag = 0;int count = 0;
    float last_error_line = 0;
+   int contro_mode = 0;
  private:
    void setLedColor(byte i, byte r, byte g, byte b);
    void setFrontLedBar( byte r, byte g, byte b);
@@ -34,6 +36,7 @@ class LidarCar {
    
 
  private:
+   
    int last_line;
    int go_flag = 0;
    int disX[360], disY[360];
