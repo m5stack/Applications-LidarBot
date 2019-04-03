@@ -34,6 +34,111 @@ void LidarCar::Init(void){
   //Serial.println("Lidar Init su.....");
 }
 
+void LidarCar::LedShow(void){
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(i, 250, 250, 250);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(i, 250, 250, 250);
+    delay(10);
+  }
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(15-i, 250, 250, 250);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(15-i, 0, 0, 0);
+    delay(10);
+  }
+/*
+  for (int i = 0; i < 16; i++){
+    setLedColor(i, 250, 0, 0);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(i, 250, 0, 0);
+    delay(10);
+  }
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(15-i, 250, 0, 0);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(15-i, 0, 0, 0);
+    delay(10);
+  }
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(i, 0, 250, 0);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(i, 0, 250, 0);
+    delay(10);
+  }
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(15-i, 0, 250, 0);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(15-i, 0, 0, 0);
+    delay(10);
+  }
+
+   for (int i = 0; i < 16; i++){
+    setLedColor(i, 0, 0, 250);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(i, 0, 0, 250);
+    delay(10);
+  }
+
+  for (int i = 0; i < 16; i++){
+    setLedColor(15-i, 0, 0, 250);
+    delay(10);
+  }
+  for (int i = 0; i < 16; i++)
+  {
+    setLedColor(15-i, 0, 0, 0);
+    delay(10);
+  }*/
+
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(120);
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(120);
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  setLedAll(0, 0, 0);
+
+  setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  //setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(120);
+  //setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  //setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(120);
+  //setLedAll(0, 0, 0); delay(100); setLedAll(255, 255, 255); delay(50);
+  //setLedAll(0, 0, 0);
+  /*
+  setLedAll(0, 0, 0); delay(100); setLedAll(0, 0, 250); delay(50);
+  setLedAll(0, 0, 0); delay(100); setLedAll(0, 0, 250); delay(120);
+  setLedAll(0, 0, 0); delay(100); setLedAll(0, 0, 250); delay(50);
+  setLedAll(0, 0, 0); delay(100); setLedAll(0, 0, 250); delay(120);
+  setLedAll(0, 0, 0); delay(100); setLedAll(0, 0, 250); delay(50);
+  setLedAll(0, 0, 0);
+  */
+}
+
 void LidarCar::setLedColor(byte i, byte r, byte g, byte b){
   Serial2.write(0xAB);
   Serial2.write(i);
@@ -258,8 +363,8 @@ void LidarCar::CarCamera(void){
     last_line = line;   
   }
   if(line > 50 || line < -50)  return;
-  M5.Lcd.setCursor(300, 0, 2);
-  M5.Lcd.printf("%2d",line);
+  //M5.Lcd.setCursor(300, 0, 2);
+  //M5.Lcd.printf("%2d",line);
   //Serial.print(" line = ");Serial.println(line);
  if((max_data > 40) || ((max_data < 5)&&(!line))){
     if(max_data > 55)
@@ -291,8 +396,8 @@ void LidarCar::TrackControl(void){
   rprtrack.SensorStatus();
   rprtrack.CalTrackDev();
  // Serial.print(" OffsetLine = ");Serial.println(rprtrack.OffsetLine);
-  M5.Lcd.setCursor(300, 0, 2);
-  M5.Lcd.print(rprtrack.OffsetLine);
+  //M5.Lcd.setCursor(300, 0, 2);
+  //M5.Lcd.print(rprtrack.OffsetLine);
   if(abs(rprtrack.OffsetLine) == 0)
    ControlWheel(rprtrack.OffsetLine,4, 0);
   else if(abs(rprtrack.OffsetLine) == 1)

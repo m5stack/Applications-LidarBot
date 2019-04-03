@@ -17,6 +17,7 @@ class LidarCar {
    void CarMaze(void);
    void CarCamera();
    void TrackControl(void);
+   void LedShow(void);
  public:
    uint8_t mapdata[180];
    uint16_t distance[360];
@@ -33,10 +34,8 @@ class LidarCar {
    void setServo0Angle(uint8_t angle);
    void setServo1Angle(uint8_t angle);
    int MazaCom(float error_line,float left_line,float right_line,float front_line);
-   
 
  private:
-   
    int last_line;
    int go_flag = 0;
    int disX[360], disY[360];

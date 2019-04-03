@@ -26,6 +26,14 @@ void setup() {
   m5.begin();
   Serial1.begin(230400, SERIAL_8N1, 16, 2);  //Lidar
   Serial2.begin(115200);                     //motor
+
+  //!logo
+  M5.Lcd.fillScreen(TFT_BLACK);
+  m5.lcd.pushImage(0, 0, 320, 240, (uint16_t *)gImage_logo);
+  M5.Lcd.setCursor(240, 1, 4);    
+  M5.Lcd.printf("V 0.0.2");
+  delay(2000);
+  M5.Lcd.fillScreen(TFT_BLACK);
   
   //!esp
   espnow.BotInit();
@@ -35,12 +43,6 @@ void setup() {
   //!service
   service.Init();
   
-  //!logo
-  M5.Lcd.fillScreen(TFT_BLACK);
-  m5.lcd.pushImage(0, 0, 320, 240, (uint16_t *)gImage_logo);
-  delay(2000);
-  M5.Lcd.fillScreen(TFT_BLACK);
-
   M5.Lcd.setCursor(240, 220, 2);    
   M5.Lcd.printf("mode");
 
@@ -51,6 +53,7 @@ void setup() {
   i2c.master_start();
 
   //!Service
+  
   xTaskCreatePinnedToCore(
                     Service,
                     "Service",
@@ -59,6 +62,7 @@ void setup() {
                     5,        
                     NULL,
                     0); 
+   
 }
 
 void OnDataSent(const uint8_t *mac_addr, esp_now_send_status_t status){
@@ -73,6 +77,10 @@ void OnDataRecv(const uint8_t *mac_addr, const uint8_t *data, int data_len)
   
  if((data_len == 3) && (!flag)) {
     lidarcar.ControlWheel(data[0], data[1], data[2]);
+ }
+
+ if((data_len == 4) && (!flag)) {
+    lidarcar.LedShow();
  }
   
 }
@@ -91,7 +99,11 @@ void loop()
   
   if(flag == 0){ 
     i2c.master_hangs();
-    esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);
+    //esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);
+    esp_err_t addStatus = esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);
+    if(addStatus != ESP_OK){
+      //lidarcar.ControlWheel(0, 0, 0);
+    }
     M5.Lcd.setCursor(240, 0);    
     M5.Lcd.printf("Control");
   }
@@ -104,14 +116,14 @@ void loop()
     M5.Lcd.printf("Maze  ");
  }
                  
-  if(flag == 2) {
+  if(flag == 3) {
     i2c.master_recovery();
     lidarcar.CarCamera();
     M5.Lcd.setCursor(240, 0);    
     M5.Lcd.printf("Camera  ");
   }
 
-   if(flag == 3) {
+   if(flag == 2) {
     i2c.master_hangs();
     lidarcar.TrackControl();
     M5.Lcd.setCursor(240, 0);    
