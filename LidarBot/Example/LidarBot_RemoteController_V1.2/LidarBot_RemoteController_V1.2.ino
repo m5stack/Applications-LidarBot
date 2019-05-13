@@ -52,7 +52,7 @@ void setup() {
   M5.Lcd.fillScreen(TFT_BLACK);
   m5.lcd.pushImage(0, 0, 320, 240, (uint16_t *)gImage_logo);
   M5.Lcd.setCursor(240, 1, 4);    
-  M5.Lcd.printf("V 0.0.2");
+  //M5.Lcd.printf("V 0.0.2");
   delay(2000);
   M5.Lcd.fillScreen(TFT_BLACK);
 
@@ -90,9 +90,9 @@ void loop()
   }
   #endif
   M5.Lcd.setCursor(240, 220, 2);    
-  M5.Lcd.printf("led");
+  //M5.Lcd.printf("led");
   if(digitalRead(37) == LOW){
    while(digitalRead(37) == LOW);
-   esp_now_send(espnow.peer_addr, led, 4);
+   //esp_now_send(espnow.peer_addr, led, 4);
   }
 }

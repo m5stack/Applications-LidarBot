@@ -57,7 +57,7 @@ void KeyBoard::GetValue(void){
     }
     //Serial.printf("dconsoleX:%d   dconsoleY:%d\n", adX, adY);
 #if 1
-   //Serial.printf("dconsoleX:%d   dconsoleY:%d\n", adX, adY);
+    //Serial.printf("dconsoleX:%d   dconsoleY:%d\n", adX, adY);
     switch ((adX - 162) / 40)
     {
       case -3: consoleX = -7; break;
@@ -85,7 +85,7 @@ void KeyBoard::GetValue(void){
       case 19: consoleX = 7; break;
     }
     //adconsoleY  min = 199 maconsoleX = 872 admed = 509 - 522
-    switch ((adY - 150) / 40)
+    switch ((adY - 155) / 40)
     {  
       case -3: consoleY = -7; break;
       case -2: consoleY = -7; break;
@@ -139,7 +139,7 @@ void KeyBoard::GetValue(void){
       case 19: consoleX = 5; break;
     }
     //adconsoleY  min = 199 maconsoleX = 872 admed = 468 - 480
-    switch ((adY - 150) / 40)
+    switch ((adY - 213) / 40)
     {  
       case -3: consoleY = -5; break;
       case -2: consoleY = -5; break;

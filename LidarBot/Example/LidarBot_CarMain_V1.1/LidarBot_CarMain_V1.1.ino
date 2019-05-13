@@ -105,7 +105,7 @@ void loop()
       //lidarcar.ControlWheel(0, 0, 0);
     }
     M5.Lcd.setCursor(240, 0);    
-    M5.Lcd.printf("Control");
+    M5.Lcd.printf("Remote");
   }
   
   if(flag == 1) {

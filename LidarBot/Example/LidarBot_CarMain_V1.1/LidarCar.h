@@ -5,8 +5,13 @@
 
 //uint8_t  rent_pp[9];
 
+
+/*!
+ * \brief The LidarCar class
+ */
 class LidarCar {
  public:
+   
    LidarCar();
    void Init(void);
    void ControlMode(void);
@@ -23,9 +28,11 @@ class LidarCar {
    uint16_t distance[360];
    float motor_out = 0,motor_y_out = 0;
    float last_motor_out;
-   int Cortrol_flag = 0;int count = 0;
+   int Cortrol_flag = 0;
+   int count = 0;
    float last_error_line = 0;
    int contro_mode = 0;
+
  private:
    void setLedColor(byte i, byte r, byte g, byte b);
    void setFrontLedBar( byte r, byte g, byte b);
@@ -34,7 +41,6 @@ class LidarCar {
    void setServo0Angle(uint8_t angle);
    void setServo1Angle(uint8_t angle);
    int MazaCom(float error_line,float left_line,float right_line,float front_line);
-
  private:
    int last_line;
    int go_flag = 0;
@@ -87,14 +93,14 @@ class LidarCar {
   { -4, -4, -2, -2, -2, -2, -2, -2, -2, -1, 0, 1, 1, 2, 3},
   { -4, -4, -4, -4, -4, -4, -4, -4, -2, -1, 0, 0, 1, 2, 2},
   { -4, -4, -4, -4, -4, -4, -4, -7, -3, -2, -1, 0, 1, 2, 2}
-
   };
-int controlMapY[15][15] =
-{
+
+  int controlMapY[15][15] =
+  {
   {4, 4, 4, 4, 4, 4, 4, 7, 3, 2, 1, 0, -1, -2, -2} ,
   {4, 3, 3, 3, 3, 3, 3, 4, 2, 1, 0, 0, -1, -2, -2} ,
   {4, 3, 3, 3, 3, 3, 3, 3, 2, 1, 0, -1, -1, -2, -3},
-  {4, 3, 3, 2, 2, 2, 2, 2, 1, 0, -1, -1, -1, -2, -3} ,
+  {4, 3, 3, 2, 2, 2, 2, 2, 1, 0, -1, -1, -1, -2, -3},
   {4, 3, 3, 2, 2, 2, 2, 2, 1, 0, -1, -1, -2, -2, -3} ,
   {4, 3, 3, 2, 2, 2, 1, 1, 0, 0, -1, -2, -2, -2, -3} ,
   {4, 3, 3, 2, 2, 1, 1, 1, 0, -1, -2, -2, -2, -2, -3} ,
@@ -106,7 +112,7 @@ int controlMapY[15][15] =
   {3, 2, 1, 1, 0, -1, -2, -2, -2, -2, -2, -2, -2, -4, -4} ,
   {2, 2, 1, 0, 0, -1, -2, -4, -4, -4, -4, -4, -4, -4, -4} ,
   {2, 1, 0, 0, -1, -2, -3, -7, -4, -4, -4, -4, -4, -4, -4}
-};
+  };
 };
 
 
