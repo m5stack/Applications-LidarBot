@@ -1,138 +1,149 @@
 # LidarBot
 
-*文档地址：https://docs.m5stack.com/#/zh_CN/app/lidarbot*
+English | [中文](https://github.com/m5stack/Applications-LidarBot/blob/master/README_zh_CN.md)
 
-LidarBot是能够应用于地图扫描、运动控制研究、路径规划、人工智能、自动驾驶以及多机协同任务的非常强大，好用的轮式机器人套件。
+*Document Link：https://docs.m5stack.com/#/zh_CN/app/lidarbot*
 
-## 目录树
+LidarBot is a very powerful and easy-to-use wheeled robot kit that can be applied to map scanning, motion control research, path planning, artificial intelligence, autopilot and multi-machine collaborative tasks.
 
-**LidarBot目录树**
+## Directory tree
+
+**LidarBot Directory tree**
 
     ├─Example
 
-    │  ├─LidarBot_CarMain_V1.1 - 雷达车主控程序
+    │  ├─LidarBot_CarMain_V1.1 - LidarBot master program
 
-    │  ├─LidarBot_RemoteController_V1.0 - 遥控手柄程序V1.0
+    │  ├─LidarBot_RemoteController_V1.0 - Remote control handle programV1.0
 
-    │  └─LidarBot_RemoteController_V1.2 - 遥控手柄程序V1.2(相比V1.0精度提高一倍)
-
-    │
-
-    ├─Firmware(底层MEGA328P固件，使用时可忽略)
-
-    │  ├─LidarBot_Bottom_FW - 车底板轮子控制板主控MEGA328P程序(可忽略)
-
-    │  └─LidarBot_Remote_FW - 手柄内部MEGA328P程序(可忽略)
+    │  └─LidarBot_RemoteController_V1.2 - Remote control handle programV1.2(Double the accuracy of V1.0)
 
     │
 
-    ├─Product_Picture - 产品图片
+    ├─Firmware(The bottom MEGA328P firmware can be ignored when used)
 
-    ├─Schematic_Diagram - 原理图示意
+    │  ├─LidarBot_Bottom_FW - Car floor wheel control board master MEGA328P program (can be ignored)
 
-    └─SComAssistant - 上位机(暂时只有雷达地图显示功能)
+    │  └─LidarBot_Remote_FW - MEGA328P program inside the handle (can be ignored)
+
+    │
+
+    ├─Product_Picture - Product Image
+
+    ├─Schematic_Diagram - Schematic diagram
+
+    └─SComAssistant - Host computer (temporary only radar map display function)
 
 
-## 程序解析：
+### Connect And Pair
 
-### **雷达车主控程序：**
+If you have no map on the screen of your remote, reconnect it.
+
+1. Press Button B of the lidarBot until the sound raised and the car will get into Broadcast mode with it's mac address on the screen which will send the lidarBot Mac address to the remote.
+2. And Press Button B for a few second,you will hear the same sound and the Mac address of lidarBot will show on the screen,use ```down``` button to select and press ```select``` when you choose the right Mac address on the screen.
+3. Check out the lidarBot screen whether it receive the message from the remote,press ```confirm``` and you finish the match.
+
+
+## Program analysis：
+
+### **LidarBot Master program：**
 
 ```arduino
-/* 主循环 */
+/* Main loop */
 void loop()
 {
-  espnow.BotConnectUpdate();// ESPNOW断开重连/换设备重连
-  lidarcar.MapDisplay();// 显示地图
-  esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);// ESPNOW发送地图数据
+  espnow.BotConnectUpdate();// ESPNOW disconnect reconnect / change device reconnection
+  lidarcar.MapDisplay();// Show map
+  esp_now_send(espnow.peer_addr, lidarcar.mapdata, 180);// ESPNOW sends map data
 }
 ```
 
-* **单个功能解析：**
+* **Single function resolution：**
 
-   * 读取雷达数据的使用
+   * Read the use of radar data
 
       ```arduino
       #include "lidarcar.h"
       LidarCar lidarcar;
 
       lidarcar.Init();
-      GetData();//得到雷达保存到数组distance[]
+      GetData();//Get the radar saved to the array distance[]
       ```
 
-   * 迷宫的使用
+   * Use of the maze
 
       ```arduino
-      lidarcar.CarMaze(); //迷宫执行函数
+      lidarcar.CarMaze(); //Maze execution function
       ```
 
-   * 循迹的使用
+   * Tracking use
 
       ```arduino
-      lidarcar.TrackControl(); //循迹执行函数
+      lidarcar.TrackControl(); //Tracking execution function
       ```
 
-   * ESP_NOW的使用
+   * Use of ESP_NOW
 
       https://github.com/m5stack/M5-espnow
 
 
-### **手柄主控程序：**
+### **Handle master program：**
 
 ```arduino
-/* 主循环 */
+/* Main loop */
 void loop()
 {
-  espnow.RemoteConnectUpdate();// ESPNOW断开重连/换设备重连
-  keyboard.GetValue();//读取摇杆数据
-  esp_now_send(espnow.peer_addr, keyboard.keyData, 3);// ESPNOW发送摇杆数据给小车主控
-  MapDisplay();// 显示地图
-  accessport.AnalzyCommand();// 发送地图数据给上位机
+  espnow.RemoteConnectUpdate();// ESPNOW disconnect reconnect / change device reconnection
+  keyboard.GetValue();//Read joystick data
+  esp_now_send(espnow.peer_addr, keyboard.keyData, 3);// ESPNOW sends joystick data to the car master
+  MapDisplay();// Show map
+  accessport.AnalzyCommand();// Send map data to the host computer
 }
 ```
 
-* **单个功能解析：**
+* **Single function resolution：**
 
-   * JOYSTICK的使用
+   * JOYSTICK
 
       ```arduino
       #include "keyboard.h"
       KeyBoard keyboard;
 
       keyboard.Init();
-      GetValue();//手柄读数保存在adX, adY，并控制赋值给数组keyData[]和手柄RGB灯
+      GetValue();//Handle readings are saved in adX, adY, and control assignments to array keyData[] and handle RGB lights
       ```
 
-   * 与上位机通信的使用
-
+   * Use of communication with the host computer
       ```arduino
       #include "accessport.h"
       AccessPort accessport;
 
-      accessport.AnalzyCommand();// 发送地图数据给PC上位机
+      accessport.AnalzyCommand();// Send map data to PC host computer
       ```
 
-## 开发环境安装
-   点击链接：[https://github.com/m5stack/M5Stack](https://github.com/m5stack/M5Stack)
+## Development environment installation
+   click the link：[https://github.com/m5stack/M5Stack](https://github.com/m5stack/M5Stack)
 
-## 原理图
+## Schematic
 
 <img src="https://raw.githubusercontent.com/m5stack/Applications-LidarBot/master/LidarBot/Schematic_Diagram/lidarbot_04.png" width="500" height="500">
 
 
-## 源码
+## Source code
 
-   雷达车：[Bot](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_CarMain_V1.1)
+   [LidarBott](https://github.com/m5stack/Applications-LidarBot/tree/master/LidarBot/Example/LidarBot_CarMain_V1.1)
 
-   遥控器：[Remote](https://github.com/m5stack/Applications-LidarBot/blob/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
+   [Remote](https://github.com/m5stack/Applications-LidarBot/blob/master/LidarBot/Example/LidarBot_RemoteController_V1.2)
 
-## 上位机
-   新加上位机调试功能。
+## Host computer
 
-   功能一：实时显示LidarBot地图。
+   New plus bit machine debugging features.
 
-## 激光车示图
+   Function 1: Display the LidarBot map in real time.
 
-**长：142mm， 宽：117mm， 高：120mm**
+## Laser car diagram
+
+**Length: 142mm, width: 117mm, height: 120mm**
 
 <img src="https://raw.githubusercontent.com/m5stack/Applications-LidarBot/master/LidarBot/Product_Picture/lidarbot_03.png" width="500" height="500">
 <img src="https://raw.githubusercontent.com/m5stack/Applications-LidarBot/master/LidarBot/Product_Picture/lidarbot_01.png" width="500" height="500">
