@@ -1,5 +1,7 @@
 #include "keyboard.h"
 
+uint8_t btn_value = 0;
+
 KeyBoard::KeyBoard(){
   
 }
@@ -42,6 +44,7 @@ void KeyBoard::GetValue(void){
      adYH = Wire.read();
      adXL = Wire.read();
      adXH = Wire.read();
+     btn_value = Wire.read();
      adX = adXH << 8 |adXL;
      adY = adYH << 8 |adYL;
 
